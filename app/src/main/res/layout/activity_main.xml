@@ -11,8 +11,12 @@
         android:layout_height="wrap_content"
         android:inputType="text|textMultiLine"
         android:id="@+id/fromEditText"
+        android:hint="Text to translate"
         android:scrollbars="vertical"
-        android:lines="15"/>
+        android:lines="14"
+        android:gravity="top|left"
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +31,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Translate"/>
+            android:text="Translate"
+            android:backgroundTint="@color/blue"/>
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,8 +47,11 @@
         android:inputType="text|textMultiLine"
         android:id="@+id/toEditText"
         android:layout_below="@+id/dropDownMenu"
+        android:hint="Translated text"
+        android:gravity="top|left"
         android:scrollbars="vertical"
-        android:lines="15"
-        android:backgroundTint="@color/black"/>
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"
+        android:lines="14"/>
 
 </RelativeLayout>
