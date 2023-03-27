@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class Translate {
     static void translate(Context context, TextView textView, String fromLanguage, String toLanguage, String text){
-        // String apiKey = "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece";
+        String apiKey = "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece";
         String url = "https://translo.p.rapidapi.com/api/v3/translate";
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -47,7 +47,7 @@ public class Translate {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
-                headers.put("X-RapidAPI-Key", "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece");
+                headers.put("X-RapidAPI-Key", apiKey);
                 headers.put("X-RapidAPI-Host", "translo.p.rapidapi.com");
                 return headers;
             }
