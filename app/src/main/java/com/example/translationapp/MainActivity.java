@@ -55,41 +55,58 @@ public class MainActivity extends AppCompatActivity {
 
             fromLanguageSpinner.setAdapter(adapter);
             toLanguageSpinner.setAdapter(adapter);
+
+            fromLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    fromLanguage = fromLanguageSpinner.getSelectedItem().toString();
+                    // Toast.makeText(MainActivity.this, fromLanguage, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    Toast.makeText(MainActivity.this, "Nothing selected", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            toLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    toLanguage = toLanguageSpinner.getSelectedItem().toString();
+                    // Toast.makeText(MainActivity.this, toLanguage, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    Toast.makeText(MainActivity.this, "Nothing selected", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            translateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String fromLanguageCode = "";
+                    String toLanguageCode = "";
+
+                    for(int i = 0; i < countriesArray.length(); i++) {
+                        try {
+                            if(countries.getString((String) countriesArray.get(i)) == fromLanguage){
+                                fromLanguageCode = countriesArray.get(i).toString();
+                            }
+
+                            if(countries.getString((String) countriesArray.get(i)) == toLanguage){
+                                toLanguageCode = countriesArray.get(i).toString();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        fromLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                fromLanguage = fromLanguageSpinner.getSelectedItem().toString();
-                // Toast.makeText(MainActivity.this, fromLanguage, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(MainActivity.this, "Nothing selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        toLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                toLanguage = toLanguageSpinner.getSelectedItem().toString();
-                // Toast.makeText(MainActivity.this, toLanguage, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(MainActivity.this, "Nothing selected", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        translateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Translate.translate(MainActivity.this, toTextView, fromLanguage, toLanguage, fromEditText.toString());
-            }
-        });
     }
 }
