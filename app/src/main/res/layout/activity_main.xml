@@ -13,10 +13,12 @@
         android:id="@+id/fromEditText"
         android:hint="Text to translate"
         android:scrollbars="vertical"
-        android:lines="14"
         android:gravity="top|left"
         android:overScrollMode="always"
-        android:scrollbarStyle="insideInset"/>
+        android:scrollbarStyle="insideInset"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,17 +43,14 @@
     </LinearLayout>
 
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text|textMultiLine"
-        android:id="@+id/toEditText"
-        android:layout_below="@+id/dropDownMenu"
-        android:hint="Translated text"
-        android:gravity="top|left"
-        android:scrollbars="vertical"
-        android:overScrollMode="always"
-        android:scrollbarStyle="insideInset"
-        android:lines="14"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/dropDownMenu"
+        android:text="Translated text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
 </RelativeLayout>
