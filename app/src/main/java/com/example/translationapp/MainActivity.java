@@ -12,6 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText fromEditText;
@@ -34,15 +40,24 @@ public class MainActivity extends AppCompatActivity {
         toLanguageSpinner = findViewById(R.id.toLanguageSpinner);
         translateButton = findViewById(R.id.translateButton);
 
-        ArrayAdapter<String> fromAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[] {"a","b","c"});
-        fromLanguageSpinner.setAdapter(fromAdapter);
+        try {
+            JSONObject countries = Countries.data();
+            JSONArray countriesArray = countries.names();
+            ArrayList<String> countriesArrayList = new ArrayList<String>();
 
-        ArrayAdapter<String> toAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                new String[] {"A","B","C"});
-        toLanguageSpinner.setAdapter(toAdapter);
+            for(int i = 0; i < countriesArray.length(); i++){
+                countriesArrayList.add(countries.getString(countriesArray.getString(i)));
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    countriesArrayList);
+
+            fromLanguageSpinner.setAdapter(adapter);
+            toLanguageSpinner.setAdapter(adapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         fromLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -73,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, String.format("Translate %s from %s to %s", fromEditText.getText(), fromLanguage, toLanguage), Toast.LENGTH_SHORT).show();
+                Translate.translate(MainActivity.this, toTextView, fromLanguage, toLanguage, fromEditText.toString());
             }
         });
     }
