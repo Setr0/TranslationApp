@@ -42,16 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             JSONObject countries = Countries.data();
-            JSONArray countriesArray = countries.names();
-            ArrayList<String> countriesArrayList = new ArrayList<String>();
+            JSONArray countriesNamesArray = countries.names();
+            ArrayList<String> countriesNamesArrayList = new ArrayList<String>();
 
-            for(int i = 0; i < countriesArray.length(); i++){
-                countriesArrayList.add(countries.getString(countriesArray.getString(i)));
+            for(int i = 0; i < countriesNamesArray.length(); i++){
+                countriesNamesArrayList.add(countriesNamesArray.get(i).toString());
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item,
-                    countriesArrayList);
+                    countriesNamesArrayList);
 
             fromLanguageSpinner.setAdapter(adapter);
             toLanguageSpinner.setAdapter(adapter);
@@ -85,24 +85,15 @@ public class MainActivity extends AppCompatActivity {
             translateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String fromLanguageCode = "";
-                    String toLanguageCode = "";
+                    String fromLanguageCode = null;
+                    try {
+                        fromLanguageCode = countries.getString(fromLanguage);
+                        String toLanguageCode = countries.getString(toLanguage);
 
-                    for(int i = 0; i < countriesArray.length(); i++) {
-                        try {
-                            if(countries.getString((String) countriesArray.get(i)) == fromLanguage){
-                                fromLanguageCode = countriesArray.get(i).toString();
-                            }
-
-                            if(countries.getString((String) countriesArray.get(i)) == toLanguage){
-                                toLanguageCode = countriesArray.get(i).toString();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                    Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
                 }
             });
         } catch (JSONException e) {
