@@ -75,7 +75,8 @@
             android:textColor="@color/winter"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:paddingRight="10dp"/>
+            android:paddingRight="10dp"
+            android:textIsSelectable="true"/>
     </LinearLayout>
 
 </RelativeLayout>
