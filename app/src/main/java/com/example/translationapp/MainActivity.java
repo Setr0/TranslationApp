@@ -2,6 +2,8 @@ package com.example.translationapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#472183")));
 
         fromEditText = findViewById(R.id.fromEditText);
         toTextView = findViewById(R.id.toTextView);
@@ -85,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
             translateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String fromLanguageCode = null;
                     try {
-                        fromLanguageCode = countries.getString(fromLanguage);
+                        String fromLanguageCode = countries.getString(fromLanguage);
                         String toLanguageCode = countries.getString(toLanguage);
 
                         Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
