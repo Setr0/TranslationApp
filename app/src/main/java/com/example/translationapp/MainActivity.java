@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
             for(int i = 0; i < countriesNamesArray.length(); i++){
                 countriesNamesArrayList.add(countriesNamesArray.get(i).toString());
             }
+
+            Collections.sort(countriesNamesArrayList);
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_spinner_dropdown_item,
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         String fromLanguageCode = countries.getString(fromLanguage);
                         String toLanguageCode = countries.getString(toLanguage);
 
+                        if(fromLanguageCode.equals(toLanguageCode)) return;
                         Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
                     } catch (JSONException e) {
                         e.printStackTrace();

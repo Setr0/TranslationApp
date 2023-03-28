@@ -29,7 +29,8 @@
             android:textColor="@color/white"
             android:textColorHint="@color/white"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +74,8 @@
             android:background="@drawable/background"
             android:textColor="@color/winter"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"/>
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"/>
     </LinearLayout>
 
 </RelativeLayout>
