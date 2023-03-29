@@ -3,6 +3,7 @@ package com.example.translationapp;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -41,6 +42,7 @@ public class Translate {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
+                Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override

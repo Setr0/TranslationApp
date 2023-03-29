@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Collections.sort(countriesNamesArrayList);
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                    android.R.layout.simple_spinner_dropdown_item,
+                    androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
                     countriesNamesArrayList);
 
             fromLanguageSpinner.setAdapter(adapter);
@@ -71,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 if(adapter.getItem(i).equals("English")){
                     toLanguageSpinner.setSelection(i);
                 }
+            }
+
+            if(toLanguageSpinner.getSelectedItem().equals(fromLanguageSpinner.getSelectedItem())){
+                Random random = new Random();
+                int randomNumber = random.nextInt(adapter.getCount());
+                toLanguageSpinner.setSelection(randomNumber);
             }
 
             fromLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -102,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
             translateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(fromEditText.getText().toString().replace(" ", "").length() == 0){
+                        Toast.makeText(MainActivity.this, "Empty input", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+
                     try {
                         String fromLanguageCode = countries.getString(fromLanguage);
                         String toLanguageCode = countries.getString(toLanguage);
