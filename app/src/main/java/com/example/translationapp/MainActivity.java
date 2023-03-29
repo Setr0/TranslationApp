@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
             fromLanguageSpinner.setAdapter(adapter);
             toLanguageSpinner.setAdapter(adapter);
+
+            for(int i = 0; i < adapter.getCount(); i++){
+                if(adapter.getItem(i).equals(Locale.getDefault().getDisplayLanguage())){
+                    fromLanguageSpinner.setSelection(i);
+                }
+
+                if(adapter.getItem(i).equals("English")){
+                    toLanguageSpinner.setSelection(i);
+                }
+            }
 
             fromLanguageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
