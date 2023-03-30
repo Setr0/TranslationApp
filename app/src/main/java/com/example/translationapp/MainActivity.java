@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                         String toLanguageCode = countries.getString(toLanguage);
 
                         if(fromLanguageCode.equals(toLanguageCode)) return;
-                        Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString());
+                        Translate.translate(MainActivity.this, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString().toLowerCase());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
