@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             toLanguageSpinner.setAdapter(adapter);
 
             for(int i = 0; i < adapter.getCount(); i++){
-                if(adapter.getItem(i).equals(Locale.getDefault().getDisplayLanguage())){
+                if(countries.getString(adapter.getItem(i)).equals(Locale.getDefault().getLanguage())){
                     fromLanguageSpinner.setSelection(i);
                 }
 
