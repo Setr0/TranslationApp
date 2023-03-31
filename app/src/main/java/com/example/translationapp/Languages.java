@@ -47,8 +47,11 @@ public class Languages {
                     JSONObject languagesObj = new JSONObject();
                     ArrayList<String> languagesNames = new ArrayList<String>();
                     for(int i = 0; i < languages.length(); i++){
-                        languagesObj.put(languages.getJSONObject(i).getString("name"), languages.getJSONObject(i).getString("code"));
-                        languagesNames.add(languages.getJSONObject(i).getString("name"));
+                        String name = languages.getJSONObject(i).getString("name");
+                        String code = languages.getJSONObject(i).getString("code");
+
+                        languagesObj.put(name, code);
+                        if(!languagesNames.contains(name)) languagesNames.add(name);
                     }
 
                     Collections.sort(languagesNames);
@@ -84,15 +87,21 @@ public class Languages {
                                 return;
                             }
 
-                            String fromLanguageCode = fromLanguageSpinner.getSelectedItem().toString();
-                            String toLanguageCode = toLanguageSpinner.getSelectedItem().toString();
+                            String fromLanguageCode = null;
+                            String toLanguageCode = null;
+                            try {
+                                fromLanguageCode = languagesObj.getString(fromLanguageSpinner.getSelectedItem().toString());
+                                toLanguageCode = languagesObj.getString(toLanguageSpinner.getSelectedItem().toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            if(fromLanguageCode == null || toLanguageCode == null) return;
 
                             if(fromLanguageCode.equals(toLanguageCode)) return;
                             Translate.translate(context, toTextView, fromLanguageCode, toLanguageCode, fromEditText.getText().toString().toLowerCase());
                         }
                     });
-
-                    System.out.println();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -100,7 +109,7 @@ public class Languages {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println(error.toString());
             }
         }){
             @Override

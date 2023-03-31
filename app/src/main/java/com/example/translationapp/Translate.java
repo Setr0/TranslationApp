@@ -58,9 +58,9 @@ public class Translate {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("source_language", "hu");
-                params.put("target_language", "it");
-                params.put("text", "Szia hogy vagy?");
+                params.put("source_language", fromLanguage);
+                params.put("target_language", toLanguage);
+                params.put("text", text);
                 return params;
             }
         };
