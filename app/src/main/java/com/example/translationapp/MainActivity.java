@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         translateButton = findViewById(R.id.translateButton);
 
         try {
-            JSONArray languages = new JSONArray();
-            Languages.data(MainActivity.this, fromLanguageSpinner, toLanguageSpinner, translateButton, fromEditText, toTextView);
+            Languages.setup(MainActivity.this, fromLanguageSpinner, toLanguageSpinner, translateButton, fromEditText, toTextView);
 
         } catch (JSONException e) {
             e.printStackTrace();

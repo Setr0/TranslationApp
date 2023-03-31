@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class Languages {
-    static void data(Context context, Spinner fromLanguageSpinner, Spinner toLanguageSpinner, Button translateButton, EditText fromEditText, TextView toTextView) throws JSONException {
+    static void setup(Context context, Spinner fromLanguageSpinner, Spinner toLanguageSpinner, Button translateButton, EditText fromEditText, TextView toTextView) throws JSONException {
         String apiKey = "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece";
         String url = "https://text-translator2.p.rapidapi.com/getLanguages";
 
