@@ -25,7 +25,7 @@ import java.util.Map;
 public class Translate {
     static void translate(Context context, TextView textView, String fromLanguage, String toLanguage, String text){
         String apiKey = "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece";
-        String url = "https://translo.p.rapidapi.com/api/v3/translate";
+        String url = "https://text-translator2.p.rapidapi.com/translate";
 
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -33,7 +33,7 @@ public class Translate {
             public void onResponse(String response) {
                 try {
                     JSONObject responeObj = new JSONObject(response);
-                    textView.setText(responeObj.getString("translated_text"));
+                    textView.setText(responeObj.getJSONObject("data").getString("translatedText"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -50,7 +50,7 @@ public class Translate {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 headers.put("X-RapidAPI-Key", apiKey);
-                headers.put("X-RapidAPI-Host", "translo.p.rapidapi.com");
+                headers.put("X-RapidAPI-Host", "text-translator2.p.rapidapi.com");
                 return headers;
             }
 
@@ -58,9 +58,9 @@ public class Translate {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("from", fromLanguage);
-                params.put("to", toLanguage);
-                params.put("text", text);
+                params.put("source_language", "hu");
+                params.put("target_language", "it");
+                params.put("text", "Szia hogy vagy?");
                 return params;
             }
         };
