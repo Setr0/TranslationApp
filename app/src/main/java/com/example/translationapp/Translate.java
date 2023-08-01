@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Translate {
     static void translate(Context context, TextView textView, String fromLanguage, String toLanguage, String text){
-        String apiKey = "86e153d27dmsh0903348e6d64167p1ecfe4jsnd950aa28fece";
+        String apiKey = "YOUR_API_KEY" ;
         String url = "https://text-translator2.p.rapidapi.com/translate";
 
         RequestQueue queue = Volley.newRequestQueue(context);
